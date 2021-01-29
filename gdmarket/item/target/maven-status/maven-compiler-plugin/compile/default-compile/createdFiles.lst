@@ -1,0 +1,17 @@
+gdmarket\Item.class
+gdmarket\ItemDeleted.class
+gdmarket\ItemInfoRepository.class
+gdmarket\ReservationCancelled.class
+gdmarket\config\kafka\KafkaProcessor.class
+gdmarket\ReturnedItem.class
+gdmarket\ItemController.class
+gdmarket\ItemInfoViewHandler.class
+gdmarket\PolicyHandler.class
+gdmarket\RentedItem.class
+gdmarket\ItemRepository.class
+gdmarket\ItemApplication.class
+gdmarket\Reserved.class
+gdmarket\AbstractEvent.class
+gdmarket\ItemRegistered.class
+gdmarket\AbstractEvent$1.class
+gdmarket\ItemInfo.class

@@ -1,0 +1,16 @@
+gdmarket\PaymentCancellationRequested.class
+gdmarket\Reservation.class
+gdmarket\ReservationApplication.class
+gdmarket\external\PaymentService.class
+gdmarket\ReservationCancelled.class
+gdmarket\config\kafka\KafkaProcessor.class
+gdmarket\ReservationRepository.class
+gdmarket\PaymentRequested.class
+gdmarket\ReservationController.class
+gdmarket\ReturnedItem.class
+gdmarket\external\Payment.class
+gdmarket\PolicyHandler.class
+gdmarket\RentedItem.class
+gdmarket\Reserved.class
+gdmarket\AbstractEvent.class
+gdmarket\AbstractEvent$1.class
