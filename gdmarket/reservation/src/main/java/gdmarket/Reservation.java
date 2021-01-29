@@ -5,6 +5,8 @@ import javax.persistence.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import gdmarket.config.kafka.KafkaProcessor;
+import gdmarket.external.Payment;
+import gdmarket.external.PaymentService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.integration.support.MessageBuilder;
 import org.springframework.messaging.MessageChannel;
@@ -60,32 +62,29 @@ public class Reservation {
     @PreUpdate
     public void onPreUpdate(){
 
-        if("NotPaid".equals(this.getPaymentStatus())) {
-            PaymentRequested paymentRequested = new PaymentRequested();
-            BeanUtils.copyProperties(this, paymentRequested);
-            paymentRequested.publishAfterCommit();
+        if("Paid".equals(this.getPaymentStatus()) || this.getPaymentStatus() == null ) {
+            Payment payment = new Payment();
+            System.out.println("@@@ ReservationNo : " + getReservationNo());
+            System.out.println("@@@ ItemNo : " + getItemNo());
+            System.out.println("@@@ ItemPrice : " + getItemPrice());
 
-            //Following code causes dependency to external APIs
-            // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+            payment.setPaymentStatus("Paid");
+            payment.setReservationNo(getReservationNo());
+            payment.setItemNo(getItemNo());
+            payment.setItemPrice(getItemPrice());
 
-            gdmarket.external.Payment payment = new gdmarket.external.Payment();
-            // mappings goes here
-            ReservationApplication.applicationContext.getBean(gdmarket.external.PaymentService.class)
-                    .approvePayment(payment);
-
+            ReservationApplication.applicationContext.getBean(PaymentService.class).approvePayment(payment);
+            System.out.println("@@@ PaymentCompleted ReservationNumber= " + getReservationNo());
         }
-        if("Paid".equals(this.getPaymentStatus())) {
-            PaymentCancellationRequested paymentCancellationRequested = new PaymentCancellationRequested();
-            BeanUtils.copyProperties(this, paymentCancellationRequested);
-            paymentCancellationRequested.publishAfterCommit();
 
-            //Following code causes dependency to external APIs
-            // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+        if("NotPaid".equals(this.getPaymentStatus())) {
+            Payment payment = new Payment();
+            System.out.println("### ReservationNo : " + getReservationNo());
 
-            gdmarket.external.Payment payment = new gdmarket.external.Payment();
-            // mappings goes here
-            ReservationApplication.applicationContext.getBean(gdmarket.external.PaymentService.class)
-                    .cancelPayment(payment);
+            payment.setPaymentStatus("NotPaid");
+
+            ReservationApplication.applicationContext.getBean(PaymentService.class).cancelPayment(getReservationNo());
+            System.out.println("### PaymentCanceled ReservationNumber= " + getReservationNo());
         }
     }
 
@@ -114,8 +113,6 @@ public class Reservation {
                 .build());
         System.out.println("@@@@@@@ reservationCancelled to Json @@@@@@@");
         System.out.println(reservationCancelled.toJson());
-
-
     }
 
     public Integer getReservationNo() {

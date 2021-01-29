@@ -1,7 +1,16 @@
 package gdmarket;
 
 import javax.persistence.*;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import gdmarket.config.kafka.KafkaProcessor;
 import org.springframework.beans.BeanUtils;
+import org.springframework.integration.support.MessageBuilder;
+import org.springframework.messaging.MessageChannel;
+import org.springframework.messaging.MessageHeaders;
+import org.springframework.util.MimeTypeUtils;
+
 import java.util.List;
 
 @Entity
@@ -18,24 +27,47 @@ public class Payment {
 
     @PostPersist
     public void onPostPersist(){
-        PaymentApproved paymentApproved = new PaymentApproved();
-        BeanUtils.copyProperties(this, paymentApproved);
-        paymentApproved.publishAfterCommit();
 
-        //Following code causes dependency to external APIs
-        // it is NOT A GOOD PRACTICE. instead, Event-Policy mapping is recommended.
+        if ("Paid".equals(paymentStatus) ) {
+            System.out.println("=============결제 승인 처리중=============");
+            PaymentApproved paymentCompleted = new PaymentApproved();
 
-        gdmarket.external.Item item = new gdmarket.external.Item();
-        // mappings goes here
-        PaymentApplication.applicationContext.getBean(gdmarket.external.ItemService.class)
-            .lendItem(item);
+            paymentCompleted.setPaymentStatus("Paid");
+            paymentCompleted.setReservationNo(reservationNo);
+            paymentCompleted.setItemNo(itemNo);
+            paymentCompleted.setItemPrice(itemPrice);
 
+            BeanUtils.copyProperties(this, paymentCompleted);
+            paymentCompleted.publishAfterCommit();
 
-        PaymentCanceled paymentCanceled = new PaymentCanceled();
-        BeanUtils.copyProperties(this, paymentCanceled);
-        paymentCanceled.publishAfterCommit();
+            try {
+                Thread.currentThread().sleep((long) (400 + Math.random() * 220));
+                System.out.println("=============결제 승인 완료=============");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
+    @PreRemove
+    public void onPreRemove(){
+        PaymentCanceled paymentCanceled = new PaymentCanceled();
+        paymentCanceled.setPaymentStatus("NotPaid");
+        paymentCanceled.setReservationNo(reservationNo);
+        paymentCanceled.setItemNo(itemNo);
+        paymentCanceled.setItemPrice(itemPrice);
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        String json = null;
+        try {
+            json = objectMapper.writeValueAsString(paymentCanceled);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException("JSON format exception", e);
+        }
+
+        System.out.println("### paymentCanceled Info ###");
+        System.out.println(json);
+    }
 
     public Integer getPaymentNo() {
         return paymentNo;
