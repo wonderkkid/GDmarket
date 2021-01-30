@@ -27,7 +27,7 @@ public class Reservation {
     private Integer itemNo;
     private String itemName;
     private Integer itemPrice;
-//    private String rentalStatus;
+    private String rentalStatus;
     private String paymentStatus;
 
     @PostPersist
@@ -62,7 +62,7 @@ public class Reservation {
     @PreUpdate
     public void onPreUpdate(){
 
-        if("Paid".equals(this.getPaymentStatus()) || this.getPaymentStatus() == null ) {
+        if(("Paid".equals(this.getPaymentStatus()) || this.getPaymentStatus() == null) && "NotRenting".equals(this.getRentalStatus())) {
             Payment payment = new Payment();
             System.out.println("@@@ ReservationNo : " + getReservationNo());
             System.out.println("@@@ ItemNo : " + getItemNo());
@@ -150,12 +150,12 @@ public class Reservation {
         this.itemName = itemName;
     }
 
-//    public String getRentalStatus() {
-//        return rentalStatus;
-//    }
-//    public void setRentalStatus(String rentalStatus) {
-//        this.rentalStatus = rentalStatus;
-//    }
+    public String getRentalStatus() {
+        return rentalStatus;
+    }
+    public void setRentalStatus(String rentalStatus) {
+        this.rentalStatus = rentalStatus;
+    }
 
     public Integer getItemPrice() {
         return itemPrice;
@@ -170,5 +170,4 @@ public class Reservation {
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
     }
-
 }

@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class PolicyHandler{
+
+    @Autowired
+    ReservationRepository reservationManagementRepository;
+
     @StreamListener(KafkaProcessor.INPUT)
     public void onStringEventListener(@Payload String eventString){
 
@@ -17,10 +21,16 @@ public class PolicyHandler{
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverRentedItem_(@Payload RentedItem rentedItem){
-
         if(rentedItem.isMe()){
             System.out.println("##### listener  : " + rentedItem.toJson());
+            System.out.println("##### rentedItem ReservationNo : " + rentedItem.getReservationNo());
+            if(rentedItem.getReservationNo() != null && "Renting".equals(rentedItem.getRentalStatus())){
+                Reservation reservation = (Reservation) reservationManagementRepository.findByReservationNo(rentedItem.getReservationNo()).get(0);
+                reservation.setRentalStatus("Renting");
+                reservationManagementRepository.save(reservation);
+            }
         }
+
     }
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverReturnedItem_(@Payload ReturnedItem returnedItem){

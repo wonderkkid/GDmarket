@@ -21,12 +21,10 @@ public class PolicyHandler{
 
     @StreamListener(KafkaProcessor.INPUT)
     public void wheneverReserved_(@Payload Reserved reserved){
-
         if(reserved.isMe()){
             System.out.println("##### listener  : " + reserved.toJson());
             System.out.println("##### reserved itemNo : " + reserved.getItemNo());
             if(reserved.getItemNo() != null && "NotRentable".equals(reserved.getItemStatus())){
-//                Item item = itemManagementRepository.findById(reserved.getItemNo()).get();
                 Item item = (Item) itemManagementRepository.findByItemNo(reserved.getItemNo()).get(0);
                 item.setItemStatus("NotRentable");
                 itemManagementRepository.save(item);
@@ -44,8 +42,6 @@ public class PolicyHandler{
                 item.setItemStatus("Rentable");
                 itemManagementRepository.save(item);
             }
-
         }
     }
-
 }
