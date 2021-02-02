@@ -1,8 +1,3 @@
-# GDmarket
-GDmarket : 근대마켓 - 근거리 대여 마켓
-
-<!--![image](https://user-images.githubusercontent.com/70673885/97950284-bcf1bd00-1dd9-11eb-8c8a-b3459c710849.png)-->
-
 
 # CirCuit Breaker
 
