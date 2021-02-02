@@ -10,6 +10,6 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 # application.yml
 
-
+![image](https://user-images.githubusercontent.com/5582138/106612834-e1159380-65ac-11eb-8e42-33852762480a.png)
 
 
