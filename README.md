@@ -10,6 +10,6 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 # application.yml
 
-https://github.com/wonderkkid/GDmarket/blob/main/feign.png?raw=true
+
 
 
