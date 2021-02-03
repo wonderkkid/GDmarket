@@ -16,7 +16,8 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 요청처리 쓰레드에서 처리시간이 600 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
 
 
-'''java
+
+      java
         if ("Paid".equals(paymentStatus) ) {
             System.out.println("=============결제 승인 처리중=============");
             PaymentApproved paymentCompleted = new PaymentApproved();
