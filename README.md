@@ -18,9 +18,11 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 ![image](https://user-images.githubusercontent.com/5582138/106613261-57b29100-65ad-11eb-8120-3f2a877a187e.png)
 
+![KakaoTalk_20210203_130452776](https://user-images.githubusercontent.com/5582138/106697123-810d0480-6621-11eb-9792-e0eb79b1182c.png)
 
 피호출되는 Payment 의 부하 처리 - 400 밀리에서 + 220 밀리 조정
 
+![KakaoTalk_20210203_130503647](https://user-images.githubusercontent.com/5582138/106697125-8407f500-6621-11eb-86fd-d80d56910bd1.png)
 
 부하테스터 siege 툴을 통한 서킷 브레이커 동작 확인:
 동시사용자 100명
