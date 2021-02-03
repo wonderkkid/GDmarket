@@ -38,6 +38,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 
 
+![KakaoTalk_20210203_132348649](https://user-images.githubusercontent.com/5582138/106698167-9daa3c00-6623-11eb-84ed-6ece9f9afac6.png)
 
 
       feign:
