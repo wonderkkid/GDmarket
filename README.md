@@ -66,5 +66,6 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초�
 
 부하테스터 siege 툴을 통한 서킷 브레이커 동작 확인:
 
-  >> 시스템은 무중단-동작 중이며, CirCuit Breaker의 부하에 따른 open / close가 반복됨.
+  > 부하 테스트 진행 동안 시스템은 무중단-동작 중이며, 
+    CirCuit Breaker의 부하에 따른 open / close가 반복됨.
 
