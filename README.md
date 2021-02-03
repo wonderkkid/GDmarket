@@ -37,7 +37,22 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
                 e.printStackTrace();
             }
         }
-'''
+
+
+
+
+ java
+      feign:
+        hystrix:
+          enabled: true
+
+      hystrix:
+        command:
+          default:
+            execution.isolation.thread.timeoutInMilliseconds: 610
+
+
+
 
 ![image](https://user-images.githubusercontent.com/5582138/106613261-57b29100-65ad-11eb-8120-3f2a877a187e.png)
 
