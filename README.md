@@ -10,8 +10,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초�
 
 # application.yml
 
-
-요청처리 쓰레드에서 처리시간이 600 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
+피호출되는 Payment-Request / Payment-approve 의 부하 처리 - 400 밀리에서 + 220 밀리 조정
 
 ![KakaoTalk_20210203_132118623](https://user-images.githubusercontent.com/5582138/106698322-ee219980-6623-11eb-8d58-f1ef6de78606.png)
 
@@ -37,7 +36,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초�
             }
         }
 
-
+요청처리 쓰레드에서 처리시간이 600 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
 
 ![KakaoTalk_20210203_132348649](https://user-images.githubusercontent.com/5582138/106698167-9daa3c00-6623-11eb-84ed-6ece9f9afac6.png)
 
@@ -57,7 +56,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초�
 
 ![KakaoTalk_20210203_130452776](https://user-images.githubusercontent.com/5582138/106697123-810d0480-6621-11eb-9792-e0eb79b1182c.png)
 
-피호출되는 Payment 의 부하 처리 - 400 밀리에서 + 220 밀리 조정
+
 
 ![KakaoTalk_20210203_130503647](https://user-images.githubusercontent.com/5582138/106697125-8407f500-6621-11eb-86fd-d80d56910bd1.png)
 
