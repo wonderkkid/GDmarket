@@ -5,7 +5,7 @@ CirCuit Breaker Framework : Spring FeignClient + Hystrix 사용
 
 Reservation -> Payment 와의 Req/Res 연결에서 요청이 과도한 경우 CirCuit Breaker 통한 격리
 
-Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
+Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
 
 
 # application.yml
@@ -52,7 +52,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
             execution.isolation.thread.timeoutInMilliseconds: 610
 
 
-
+siege -c10 -t30S -r10 -v --content-type "application/json" 'http://reservation:8080/reservations/1 PATCH {"paymentStatus":"Paid"}'
 
 ![KakaoTalk_20210203_130452776](https://user-images.githubusercontent.com/5582138/106697123-810d0480-6621-11eb-9792-e0eb79b1182c.png)
 
