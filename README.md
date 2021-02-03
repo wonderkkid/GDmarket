@@ -10,8 +10,6 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 # application.yml
 
-![image](https://user-images.githubusercontent.com/5582138/106612834-e1159380-65ac-11eb-8e42-33852762480a.png)
-
 
 요청처리 쓰레드에서 처리시간이 600 밀리가 초과할 경우 CirCuit Breaker Closing 설정 
 
@@ -41,7 +39,7 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 
 
- java
+
       feign:
         hystrix:
           enabled: true
@@ -53,8 +51,6 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 600 밀리가 초�
 
 
 
-
-![image](https://user-images.githubusercontent.com/5582138/106613261-57b29100-65ad-11eb-8120-3f2a877a187e.png)
 
 ![KakaoTalk_20210203_130452776](https://user-images.githubusercontent.com/5582138/106697123-810d0480-6621-11eb-9792-e0eb79b1182c.png)
 
