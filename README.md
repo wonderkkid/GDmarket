@@ -51,8 +51,9 @@ Hystrix 설정: 요청처리 쓰레드에서 처리시간이 610 밀리가 초�
           default:
             execution.isolation.thread.timeoutInMilliseconds: 610
 
-
-java siege -c10 -t30S -r10 -v --content-type "application/json" 'http://reservation:8080/reservations/1 PATCH {"paymentStatus":"Paid"}'
+''''
+    siege -c10 -t30S -r10 -v --content-type "application/json" 'http://reservation:8080/reservations/1 PATCH {"paymentStatus":"Paid"}'
+''''
 
 ![KakaoTalk_20210203_130452776](https://user-images.githubusercontent.com/5582138/106697123-810d0480-6621-11eb-9792-e0eb79b1182c.png)
 
